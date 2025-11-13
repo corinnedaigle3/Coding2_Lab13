@@ -269,10 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feda6e1fc9879954690024c99c5b23ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeWeather
-  directionalLight: {fileID: 410087040}
-  lightColor: {r: 1, g: 1, b: 1, a: 1}
-  targetIntensity: 0
-  lightRotation: {x: 0, y: 0, z: 0}
+  cityState: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
