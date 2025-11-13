@@ -26,8 +26,8 @@ public class ChangeWeather : MonoBehaviour
     [Header("Light")]
     public Light directionalLight;
     public float targetIntensity;
-    public float lightRotationSpeed;
-    public Vector3 currentSunRotation;
+    public Color newColor;
+
 
     public WeatherManager m;
 
@@ -36,15 +36,13 @@ public class ChangeWeather : MonoBehaviour
     {
         m = new WeatherManager();
         StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
-        directionalLight = UnityEngine.Object.FindFirstObjectByType<Light>();
-
         Main();
     }
 
     void Update()
     {
-        directionalLight.transform.Rotate(Vector3.right * lightRotationSpeed * Time.deltaTime);
-        //ChangeToOrlandoSkybox();
+        directionalLight.transform.Rotate(Vector3.right * 10f * Time.deltaTime);
+        directionalLight.color = newColor;
     }
 
     public void ChangeCity()
@@ -55,31 +53,36 @@ public class ChangeWeather : MonoBehaviour
                 Debug.Log("Orlando");
                 StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
                 RenderSettings.skybox = sunnySkybox;
+                newColor = Color.blue;
+                //StartCoroutine(LerpLightIntensity(0.3f, 2f));
                 break;
 
             case CityState.Paris:
                 Debug.Log("Paris");
                 StartCoroutine(m.GetWeatherXML_2(m.OnXMLDataLoaded));
                 RenderSettings.skybox = rainySkybox;
+                newColor = Color.white;
                 break;
 
             case CityState.Tokyo:
                 Debug.Log("Tokyo");
                 StartCoroutine(m.GetWeatherXML_3(m.OnXMLDataLoaded));
                 RenderSettings.skybox = cloudySkybox;
+                newColor = Color.pink;
                 break;
 
             case CityState.California:
                 Debug.Log("California");
                 StartCoroutine(m.GetWeatherXML_4(m.OnXMLDataLoaded));
                 RenderSettings.skybox = sunnySkybox;
-                //StartCoroutine(LerpLightIntensity(0.3f, 2f));
+                newColor = Color.yellow;
                 break;
 
             case CityState.Stockholm:
                 Debug.Log("Stockholm");
                 StartCoroutine(m.GetWeatherXML_5(m.OnXMLDataLoaded));
                 RenderSettings.skybox = snowySkybox;
+                newColor = Color.green;
                 break;
         }
     }
@@ -106,7 +109,7 @@ public class ChangeWeather : MonoBehaviour
 
         // Convert UTC to each city’s time zone
         DateTime estDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")); // Orlando (EST)
-        DateTime cetDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time")); // Paris, Stockholm
+        DateTime cetDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time")); // Paris, (Change this one Stockholm)
         DateTime jstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Tokyo Standard Time")); // Tokyo
         DateTime pstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time")); // California
 
