@@ -270,6 +270,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeWeather
   cityState: 0
+  sunnySkybox: {fileID: 2100000, guid: fa95802f80bd745cfb5e9c89f7e22341, type: 2}
+  cloudySkybox: {fileID: 2100000, guid: 5c8d5031ce45e4962818ca2b5426a8cf, type: 2}
+  rainySkybox: {fileID: 2100000, guid: e0a21ebc98cee4e46bbae873ec0be703, type: 2}
+  snowySkybox: {fileID: 2100000, guid: 7b0f2096b49ccfb4f8b47c8084d650fa, type: 2}
+  directionalLight: {fileID: 410087040}
+  targetIntensity: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

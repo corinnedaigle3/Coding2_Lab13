@@ -1,6 +1,7 @@
+using System;
+using System.Globalization;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ChangeWeather : MonoBehaviour
 {
@@ -9,9 +10,10 @@ public class ChangeWeather : MonoBehaviour
         Orlando,
         Paris,
         Tokyo,
-        Athens,
+        California,
         Stockholm
     }
+
     [Header("Current City")]
     public CityState cityState;
 
@@ -24,7 +26,8 @@ public class ChangeWeather : MonoBehaviour
     [Header("Light")]
     public Light directionalLight;
     public float targetIntensity;
-    //public Vector3 lightRotation;
+    public float lightRotationSpeed;
+    public Vector3 currentSunRotation;
 
     public WeatherManager m;
 
@@ -33,17 +36,20 @@ public class ChangeWeather : MonoBehaviour
     {
         m = new WeatherManager();
         StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
-        directionalLight = Object.FindFirstObjectByType<Light>();
+        directionalLight = UnityEngine.Object.FindFirstObjectByType<Light>();
+
+        Main();
     }
 
     void Update()
     {
-        //directionalLight.transform.Rotate(Vector3.right * 10f * Time.deltaTime);
+        directionalLight.transform.Rotate(Vector3.right * lightRotationSpeed * Time.deltaTime);
         //ChangeToOrlandoSkybox();
     }
+
     public void ChangeCity()
     {
-        switch(cityState)
+        switch (cityState)
         {
             case CityState.Orlando:
                 Debug.Log("Orlando");
@@ -63,10 +69,11 @@ public class ChangeWeather : MonoBehaviour
                 RenderSettings.skybox = cloudySkybox;
                 break;
 
-            case CityState.Athens:
-                Debug.Log("Athens");
+            case CityState.California:
+                Debug.Log("California");
                 StartCoroutine(m.GetWeatherXML_4(m.OnXMLDataLoaded));
                 RenderSettings.skybox = sunnySkybox;
+                //StartCoroutine(LerpLightIntensity(0.3f, 2f));
                 break;
 
             case CityState.Stockholm:
@@ -77,7 +84,7 @@ public class ChangeWeather : MonoBehaviour
         }
     }
 
-    IEnumerator LerpLightIntensity(float targetIntensity, float duration = 1f)
+    /*IEnumerator LerpLightIntensity(float targetIntensity, float duration)
     {
         float startIntensity = directionalLight.intensity;
         float time = 0f;
@@ -90,5 +97,32 @@ public class ChangeWeather : MonoBehaviour
         }
 
         directionalLight.intensity = targetIntensity;
+    }*/
+
+    public static void Main()
+    {
+        DateTime utcDate = DateTime.UtcNow;
+        DateTime localDate = DateTime.Now;
+
+        // Convert UTC to each city’s time zone
+        DateTime estDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")); // Orlando (EST)
+        DateTime cetDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time")); // Paris, Stockholm
+        DateTime jstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Tokyo Standard Time")); // Tokyo
+        DateTime pstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time")); // California
+
+        string[] cultureNames = { "en-US"};
+
+        foreach (var cultureName in cultureNames)
+        {
+            var culture = new System.Globalization.CultureInfo(cultureName);
+            Debug.Log($"{culture.NativeName}:");
+
+            Debug.Log($"   Local date and time: {localDate.ToString(culture)}, {localDate.Kind}");
+            Debug.Log($"   UTC date and time:   {utcDate.ToString(culture)}, {utcDate.Kind}");
+            Debug.Log($"   EST (Orlando):       {estDate.ToString(culture)}");
+            Debug.Log($"   CET (Paris / Stockholm):         {cetDate.ToString(culture)}");
+            Debug.Log($"   JST (Tokyo):         {jstDate.ToString(culture)}");
+            Debug.Log($"   PST (California):        {pstDate.ToString(culture)}");
+        }
     }
 }

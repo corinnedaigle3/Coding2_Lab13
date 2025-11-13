@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -37,8 +36,8 @@ public class WeatherManager
         return CallAPI(xmlApi_3, callback);
     }
 
-    // Third City -- Athens
-    private const string xmlApi_4 = "https://api.openweathermap.org/data/2.5/weather?q=Athens,gr&mode=xml&appid=76d07681130d560a364db557a2872510";
+    // Third City -- California
+    private const string xmlApi_4 = "https://api.openweathermap.org/data/2.5/weather?q=California,us&mode=xml&appid=76d07681130d560a364db557a2872510";
 
 
     public IEnumerator GetWeatherXML_4(Action<string> callback)
