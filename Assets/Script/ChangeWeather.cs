@@ -3,10 +3,10 @@ using UnityEngine;
 public class ChangeWeather : MonoBehaviour
 {
     /*public Material orlandoSkybox;
-    public Material orlandoSkybox1;
-    public Material orlandoSkybox2;
-    public Material orlandoSkybox3;
-    public Material orlandoSkybox4;*/
+    public Material parisSkybox;
+    public Material tokyoSkybox;
+    public Material athensSkybox;
+    public Material stockholmSkybox;*/
     public WeatherManager m;
 
     public Color lightColor;
@@ -19,8 +19,8 @@ public class ChangeWeather : MonoBehaviour
     {
         m = new WeatherManager();
         StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
+        
         //directionalLight = GetComponent<Light>();
-
         //RenderSettings.skybox = orlandoSkybox;
     }
     void Update()
@@ -32,42 +32,32 @@ public class ChangeWeather : MonoBehaviour
 
     public void ChangeToOrlandoSkybox()
     {
-        //RenderSettings.skybox = orlandoSkybox1;
+        //RenderSettings.skybox = orlandoSkybox;
         directionalLight.color = Color.blue;
-        //lightRotation = new Vector3(50f, -30f, 0f);
-       //transform.localEulerAngles = lightRotation;
 
     }
 
-    public void ChangeToOrlandoSkybox1()
+    public void ChangeToParisSkybox()
     {
-        //RenderSettings.skybox = orlandoSkybox1;
+        //RenderSettings.skybox = parisSkybox;
         directionalLight.color = Color.blue;
-        lightRotation = new Vector3(50f, -30f, 0f);
-        transform.localEulerAngles = lightRotation;
     }
 
-    public void ChangeToOrlandoSkybox2()
+    public void ChangeToTokyoSkybox()
     {
-        //RenderSettings.skybox = orlandoSkybox2;
+        //RenderSettings.skybox = tokyoSkybox;
         directionalLight.color = Color.blue;
-        lightRotation = new Vector3(50f, -30f, 0f);
-        transform.localEulerAngles = lightRotation;
     }
 
-    public void ChangeToOrlandoSkybox3()
+    public void ChangeToAthensSkybox()
     {
-        //RenderSettings.skybox = orlandoSkybox3;
+        //RenderSettings.skybox = athensSkybox;
         directionalLight.color = Color.blue;
-        lightRotation = new Vector3(50f, -30f, 0f);
-        transform.localEulerAngles = lightRotation;
     }
 
-    public void ChangeToOrlandoSkybox4()
+    public void ChangeToStockholmSkybo4()
     {
-        //RenderSettings.skybox = orlandoSkybox4;
+        //RenderSettings.skybox = stockholmSkybox;
         directionalLight.color = Color.blue;
-        lightRotation = new Vector3(50f, -30f, 0f);
-        transform.localEulerAngles = lightRotation;
     }
 }

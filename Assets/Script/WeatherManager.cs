@@ -14,26 +14,6 @@ public class WeatherManager
     // First City -- Orlando
     private const string xmlApi_1 = "http://api.openweathermap.org/data/2.5/weather?q=Orlando,us&mode=xml&appid=0547ce8e4ac6717032b46f41b337219e";
 
-    private IEnumerator CallAPI(string url, Action<string> callback)
-    {
-        using (UnityWebRequest request = UnityWebRequest.Get(url))
-        {
-            yield return request.SendWebRequest();
-            if (request.result == UnityWebRequest.Result.ConnectionError)
-            {
-                Debug.LogError($"network problem: {request.error}");
-            }
-            else if (request.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError($"response error: {request.responseCode}");
-            }
-            else
-            {
-                callback(request.downloadHandler.text);
-            }
-        }
-    }
-
     public IEnumerator GetWeatherXML_1(Action<string> callback)
     {
         return CallAPI(xmlApi_1, callback);
@@ -75,4 +55,23 @@ public class WeatherManager
         return CallAPI(xmlApi_5, callback);
     }
 
+    private IEnumerator CallAPI(string url, Action<string> callback)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+            if (request.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.LogError($"network problem: {request.error}");
+            }
+            else if (request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError($"response error: {request.responseCode}");
+            }
+            else
+            {
+                callback(request.downloadHandler.text);
+            }
+        }
+    }
 }
