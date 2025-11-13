@@ -71,6 +71,8 @@ public class ChangeWeather : MonoBehaviour
 
         if (directionalLight != null)
         {
+            directionalLight.color = Color.white;
+
             // Set the initial intensity
             directionalLight.intensity = targetIntensity;
             Debug.Log("Directional Light intensity set to: " + directionalLight.intensity);
