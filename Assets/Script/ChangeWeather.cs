@@ -10,8 +10,8 @@ public class ChangeWeather : MonoBehaviour
         Orlando,
         Paris,
         Tokyo,
-        California,
-        Stockholm
+        Sacramento,
+        Beijing
     }
 
     [Header("Current City")]
@@ -71,15 +71,15 @@ public class ChangeWeather : MonoBehaviour
                 newColor = Color.pink;
                 break;
 
-            case CityState.California:
-                Debug.Log("California");
+            case CityState.Sacramento:
+                Debug.Log("Sacramento");
                 StartCoroutine(m.GetWeatherXML_4(m.OnXMLDataLoaded));
                 RenderSettings.skybox = sunnySkybox;
                 newColor = Color.yellow;
                 break;
 
-            case CityState.Stockholm:
-                Debug.Log("Stockholm");
+            case CityState.Beijing:
+                Debug.Log("Beijing");
                 StartCoroutine(m.GetWeatherXML_5(m.OnXMLDataLoaded));
                 RenderSettings.skybox = snowySkybox;
                 newColor = Color.green;
@@ -111,7 +111,8 @@ public class ChangeWeather : MonoBehaviour
         DateTime estDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")); // Orlando (EST)
         DateTime cetDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time")); // Paris, (Change this one Stockholm)
         DateTime jstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Tokyo Standard Time")); // Tokyo
-        DateTime pstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time")); // California
+        DateTime cstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")); // Beijing
+        DateTime pstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time")); // Sacramento
 
         string[] cultureNames = { "en-US"};
 
@@ -123,9 +124,10 @@ public class ChangeWeather : MonoBehaviour
             Debug.Log($"   Local date and time: {localDate.ToString(culture)}, {localDate.Kind}");
             Debug.Log($"   UTC date and time:   {utcDate.ToString(culture)}, {utcDate.Kind}");
             Debug.Log($"   EST (Orlando):       {estDate.ToString(culture)}");
-            Debug.Log($"   CET (Paris / Stockholm):         {cetDate.ToString(culture)}");
+            Debug.Log($"   CET (Paris):         {cetDate.ToString(culture)}");
             Debug.Log($"   JST (Tokyo):         {jstDate.ToString(culture)}");
-            Debug.Log($"   PST (California):        {pstDate.ToString(culture)}");
+            Debug.Log($"   CST (Beijing):        {cstDate.ToString(culture)}");
+            Debug.Log($"   PST (Sacramento):        {pstDate.ToString(culture)}");
         }
     }
 }

@@ -36,8 +36,8 @@ public class WeatherManager
         return CallAPI(xmlApi_3, callback);
     }
 
-    // Third City -- California
-    private const string xmlApi_4 = "https://api.openweathermap.org/data/2.5/weather?q=California,us&mode=xml&appid=76d07681130d560a364db557a2872510";
+    // Third City -- Sacramento
+    private const string xmlApi_4 = "https://api.openweathermap.org/data/2.5/weather?q=Sacramento,us&mode=xml&appid=76d07681130d560a364db557a2872510";
 
 
     public IEnumerator GetWeatherXML_4(Action<string> callback)
@@ -45,8 +45,8 @@ public class WeatherManager
         return CallAPI(xmlApi_4, callback);
     }
 
-    // Fourth City -- Stockholm
-    private const string xmlApi_5 = "https://api.openweathermap.org/data/2.5/weather?q=Stockholm,se&mode=xml&appid=76d07681130d560a364db557a2872510";
+    // Fourth City -- Beijing
+    private const string xmlApi_5 = "https://api.openweathermap.org/data/2.5/weather?q=Beijing,cn&mode=xml&appid=76d07681130d560a364db557a2872510";
 
 
     public IEnumerator GetWeatherXML_5(Action<string> callback)
