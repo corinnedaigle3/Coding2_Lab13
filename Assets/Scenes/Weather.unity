@@ -274,8 +274,11 @@ MonoBehaviour:
   cloudySkybox: {fileID: 2100000, guid: 5c8d5031ce45e4962818ca2b5426a8cf, type: 2}
   rainySkybox: {fileID: 2100000, guid: e0a21ebc98cee4e46bbae873ec0be703, type: 2}
   snowySkybox: {fileID: 2100000, guid: 7b0f2096b49ccfb4f8b47c8084d650fa, type: 2}
+  defaultSkybox: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  HideSkybox: 0
   directionalLight: {fileID: 410087040}
   targetIntensity: 0
+  newColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

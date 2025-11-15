@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Collections;
 using UnityEngine;
+using static ChangeWeather;
 
 public class ChangeWeather : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class ChangeWeather : MonoBehaviour
     public Material rainySkybox;
     public Material snowySkybox;
 
+    [Header("Default")]
+    public Material defaultSkybox;
+    public bool HideSkybox;
+
     [Header("Light")]
     public Light directionalLight;
     public float targetIntensity;
@@ -36,13 +41,17 @@ public class ChangeWeather : MonoBehaviour
     {
         m = new WeatherManager();
         StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
+        ChangeCity();
         Main();
+        HideSkybox = false;
     }
 
     void Update()
     {
         directionalLight.transform.Rotate(Vector3.right * 10f * Time.deltaTime);
         directionalLight.color = newColor;
+        directionalLight.intensity = targetIntensity;
+        SkyboxDefault();
     }
 
     public void ChangeCity()
@@ -53,6 +62,7 @@ public class ChangeWeather : MonoBehaviour
                 Debug.Log("Orlando");
                 StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
                 RenderSettings.skybox = sunnySkybox;
+                targetIntensity = 2;
                 newColor = Color.blue;
                 //StartCoroutine(LerpLightIntensity(0.3f, 2f));
                 break;
@@ -61,6 +71,7 @@ public class ChangeWeather : MonoBehaviour
                 Debug.Log("Paris");
                 StartCoroutine(m.GetWeatherXML_2(m.OnXMLDataLoaded));
                 RenderSettings.skybox = rainySkybox;
+                targetIntensity = 8;
                 newColor = Color.white;
                 break;
 
@@ -68,6 +79,7 @@ public class ChangeWeather : MonoBehaviour
                 Debug.Log("Tokyo");
                 StartCoroutine(m.GetWeatherXML_3(m.OnXMLDataLoaded));
                 RenderSettings.skybox = cloudySkybox;
+                targetIntensity = 15;
                 newColor = Color.pink;
                 break;
 
@@ -75,6 +87,7 @@ public class ChangeWeather : MonoBehaviour
                 Debug.Log("Sacramento");
                 StartCoroutine(m.GetWeatherXML_4(m.OnXMLDataLoaded));
                 RenderSettings.skybox = sunnySkybox;
+                targetIntensity = 30;
                 newColor = Color.yellow;
                 break;
 
@@ -82,10 +95,44 @@ public class ChangeWeather : MonoBehaviour
                 Debug.Log("Beijing");
                 StartCoroutine(m.GetWeatherXML_5(m.OnXMLDataLoaded));
                 RenderSettings.skybox = snowySkybox;
+                targetIntensity = 100;
                 newColor = Color.green;
                 break;
         }
     }
+
+    public void SkyboxDefault()
+    {
+        if (HideSkybox)
+        {
+            RenderSettings.skybox = defaultSkybox;
+            return;
+        }
+
+        switch (cityState)
+        {
+            case CityState.Orlando:
+                RenderSettings.skybox = sunnySkybox;
+                break;
+
+            case CityState.Paris:
+                RenderSettings.skybox = rainySkybox;
+                break;
+
+            case CityState.Tokyo:
+                RenderSettings.skybox = cloudySkybox;
+                break;
+
+            case CityState.Sacramento:
+                RenderSettings.skybox = sunnySkybox;
+                break;
+
+            case CityState.Beijing:
+                RenderSettings.skybox = snowySkybox;
+                break;
+        }
+    }
+
 
     /*IEnumerator LerpLightIntensity(float targetIntensity, float duration)
     {
