@@ -15,7 +15,7 @@ public class WeatherManager
     // First City -- Orlando
     private const string xmlApi_1 = "https://api.openweathermap.org/data/2.5/weather?q=Orlando,us&mode=xml&appid=8c7d626d2f67ba1d87b11bb8e603ef9d";
 
-    //https://api.openweathermap.org/data/2.5/weather?q=Orlando,us&mode=xml&appid=76d07681130d560a364db557a2872510
+    //api.openweathermap.org/data/2.5/weather?q=Orlando,us&mode=xml&appid=76d07681130d560a364db557a2872510
 
     public IEnumerator GetWeatherXML_1(Action<string> callback)
     {

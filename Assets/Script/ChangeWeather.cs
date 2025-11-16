@@ -91,7 +91,12 @@ public class ChangeWeather : MonoBehaviour
 
     void Update()
     {
+        DateTime localTime = GetCityLocalTime();
+
+        lightRange = GetSunAngleFromTime(localTime);
+
         directionalLight.transform.rotation = Quaternion.Euler(lightRange, 0f, 0f);
+
         directionalLight.color = newColor;
         directionalLight.intensity = targetIntensity;
     }
@@ -167,7 +172,7 @@ public class ChangeWeather : MonoBehaviour
         DateTime estDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")); // Orlando (EST)
         DateTime cetDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time")); // Paris, (Change this one Stockholm)
         DateTime jstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Tokyo Standard Time")); // Tokyo
-        DateTime cstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")); // Beijing
+        DateTime cstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("China Standard Time")); // Beijing
         DateTime pstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time")); // Sacramento
 
         // Only print the time part
@@ -191,6 +196,69 @@ public class ChangeWeather : MonoBehaviour
             Debug.Log($"   JST (Tokyo):         {jstTimeOnly}");
             Debug.Log($"   CST (Beijing):       {cstTimeOnly}");
             Debug.Log($"   PST (Sacramento):    {pstTimeOnly}");
+        }
+    }
+
+
+    float GetSunAngleFromTime(DateTime localTime)
+    {
+        float hour = localTime.Hour;
+        float minute = localTime.Minute;
+
+        // Time in hours, including minutes
+        float timeInHours = hour + (minute / 60f);
+
+        // Shift so 6:00 = 0h
+        float shifted = timeInHours - 6f;
+        if (shifted < 0f)
+            shifted += 24f;
+
+        // Fraction of 24h
+        float fractionOfDay = shifted / 24f;
+
+        // Map to 0–360 degrees
+        float angle = fractionOfDay * 360f;
+        return angle;
+    }
+
+    DateTime GetCityLocalTime()
+    {
+        DateTime utcNow = DateTime.UtcNow;
+
+        switch (cityState)
+        {
+            case CityState.Orlando:
+                return TimeZoneInfo.ConvertTimeFromUtc(
+                    utcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")
+                );
+
+            case CityState.Paris:
+                return TimeZoneInfo.ConvertTimeFromUtc(
+                    utcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time")
+                );
+
+            case CityState.Tokyo:
+                return TimeZoneInfo.ConvertTimeFromUtc(
+                    utcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("Tokyo Standard Time")
+                );
+
+            case CityState.Sacramento:
+                return TimeZoneInfo.ConvertTimeFromUtc(
+                    utcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time")
+                );
+
+            case CityState.Beijing:
+                return TimeZoneInfo.ConvertTimeFromUtc(
+                    utcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("China Standard Time")
+                );
+
+            default:
+                return DateTime.Now;
         }
     }
 
