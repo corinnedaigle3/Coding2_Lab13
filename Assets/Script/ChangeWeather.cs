@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Collections;
 using UnityEngine;
 using static ChangeWeather;
+using System.Collections.Generic;
 
 public class ChangeWeather : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ChangeWeather : MonoBehaviour
         Sacramento,
         Beijing
     }
+
 
     [Header("Current City")]
     public CityState cityState;
@@ -33,13 +35,15 @@ public class ChangeWeather : MonoBehaviour
     public float targetIntensity;
     public Color newColor;
 
-
+    public WeatherParser weatherParser;
     public WeatherManager m;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         m = new WeatherManager();
+        weatherParser = GetComponent<WeatherParser>();
+
         StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
         ChangeCity();
         Main();
@@ -59,41 +63,40 @@ public class ChangeWeather : MonoBehaviour
         switch (cityState)
         {
             case CityState.Orlando:
-                Debug.Log("Orlando");
-                StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
+                StartCoroutine(routine: m.GetWeatherXML_1(weatherParser.ParseWeather));
+
+                //StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
                 RenderSettings.skybox = sunnySkybox;
                 targetIntensity = 2;
                 newColor = Color.blue;
-                //StartCoroutine(LerpLightIntensity(0.3f, 2f));
                 break;
 
             case CityState.Paris:
-                Debug.Log("Paris");
-                StartCoroutine(m.GetWeatherXML_2(m.OnXMLDataLoaded));
+                StartCoroutine(routine: m.GetWeatherXML_2(weatherParser.ParseWeather));
+                //StartCoroutine(m.GetWeatherXML_2(m.OnXMLDataLoaded));
                 RenderSettings.skybox = rainySkybox;
                 targetIntensity = 8;
                 newColor = Color.white;
                 break;
 
             case CityState.Tokyo:
-                Debug.Log("Tokyo");
-                StartCoroutine(m.GetWeatherXML_3(m.OnXMLDataLoaded));
+                StartCoroutine(routine: m.GetWeatherXML_3(weatherParser.ParseWeather));
                 RenderSettings.skybox = cloudySkybox;
                 targetIntensity = 15;
                 newColor = Color.pink;
                 break;
 
             case CityState.Sacramento:
-                Debug.Log("Sacramento");
-                StartCoroutine(m.GetWeatherXML_4(m.OnXMLDataLoaded));
+                StartCoroutine(routine: m.GetWeatherXML_4(weatherParser.ParseWeather));
+                //StartCoroutine(m.GetWeatherXML_4(m.OnXMLDataLoaded));
                 RenderSettings.skybox = sunnySkybox;
                 targetIntensity = 30;
                 newColor = Color.yellow;
                 break;
 
             case CityState.Beijing:
-                Debug.Log("Beijing");
-                StartCoroutine(m.GetWeatherXML_5(m.OnXMLDataLoaded));
+                StartCoroutine(routine: m.GetWeatherXML_5(weatherParser.ParseWeather));
+                //StartCoroutine(m.GetWeatherXML_5(m.OnXMLDataLoaded));
                 RenderSettings.skybox = snowySkybox;
                 targetIntensity = 100;
                 newColor = Color.green;
@@ -166,7 +169,7 @@ public class ChangeWeather : MonoBehaviour
         foreach (var cultureName in cultureNames)
         {
             var culture = new System.Globalization.CultureInfo(cultureName);
-            Debug.Log($"{culture.NativeName}:");
+/*            Debug.Log($"{culture.NativeName}:");
 
             Debug.Log($"   Local date and time: {localDate.ToString(culture)}, {localDate.Kind}");
             Debug.Log($"   UTC date and time:   {utcDate.ToString(culture)}, {utcDate.Kind}");
@@ -174,7 +177,7 @@ public class ChangeWeather : MonoBehaviour
             Debug.Log($"   CET (Paris):         {cetDate.ToString(culture)}");
             Debug.Log($"   JST (Tokyo):         {jstDate.ToString(culture)}");
             Debug.Log($"   CST (Beijing):        {cstDate.ToString(culture)}");
-            Debug.Log($"   PST (Sacramento):        {pstDate.ToString(culture)}");
+            Debug.Log($"   PST (Sacramento):        {pstDate.ToString(culture)}");*/
         }
     }
 }

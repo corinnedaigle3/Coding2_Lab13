@@ -7,8 +7,10 @@ public class WeatherManager
 {
     public void OnXMLDataLoaded(string data)
     {
-        Debug.Log(data);
+        //Debug.Log(data);
     }
+
+
 
     // First City -- Orlando
     private const string xmlApi_1 = "https://api.openweathermap.org/data/2.5/weather?q=Orlando,us&mode=xml&appid=76d07681130d560a364db557a2872510";
@@ -17,6 +19,8 @@ public class WeatherManager
     {
         return CallAPI(xmlApi_1, callback);
     }
+
+
 
     // Second City -- Paris
     private const string xmlApi_2 = "https://api.openweathermap.org/data/2.5/weather?q=Paris,fr&mode=xml&appid=76d07681130d560a364db557a2872510";
