@@ -35,6 +35,10 @@ public class ChangeWeather : MonoBehaviour
     public float targetIntensity;
     public Color newColor;
 
+    [Range(0, 360)]
+    public int lightRange;
+
+
     public WeatherParser weatherParser;
     public WeatherManager m;
 
@@ -48,8 +52,10 @@ public class ChangeWeather : MonoBehaviour
         weatherParser = GetComponent<WeatherParser>();
         Add();
         StartCoroutine(routine: m.GetWeatherXML_1(weatherParser.ParseWeather));
+
+        changeSkyBox();
         ChangeCity();
-        Main();
+        TimeZone();
         HideSkybox = false;
     }
 
@@ -85,7 +91,7 @@ public class ChangeWeather : MonoBehaviour
 
     void Update()
     {
-        directionalLight.transform.Rotate(Vector3.right * 10f * Time.deltaTime);
+        //directionalLight.transform.Rotate(Max);
         directionalLight.color = newColor;
         directionalLight.intensity = targetIntensity;
     }
@@ -96,7 +102,6 @@ public class ChangeWeather : MonoBehaviour
         {
             case CityState.Orlando:
                 StartCoroutine(routine: m.GetWeatherXML_1(weatherParser.ParseWeather));
-
                 //StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
                 //RenderSettings.skybox = sunnySkybox;
                 targetIntensity = 2;
@@ -153,7 +158,7 @@ public class ChangeWeather : MonoBehaviour
         directionalLight.intensity = targetIntensity;
     }*/
 
-    public static void Main()
+    public static void TimeZone()
     {
         DateTime utcDate = DateTime.UtcNow;
         DateTime localDate = DateTime.Now;
@@ -165,20 +170,28 @@ public class ChangeWeather : MonoBehaviour
         DateTime cstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")); // Beijing
         DateTime pstDate = TimeZoneInfo.ConvertTimeFromUtc(utcDate, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time")); // Sacramento
 
+        // Only print the time part
+        string estTimeOnly = estDate.ToString("HH:mm:ss");
+        string cetTimeOnly = cetDate.ToString("HH:mm:ss");
+        string jstTimeOnly = jstDate.ToString("HH:mm:ss");
+        string cstTimeOnly = cstDate.ToString("HH:mm:ss");
+        string pstTimeOnly = pstDate.ToString("HH:mm:ss");
+
         string[] cultureNames = { "en-US"};
 
         foreach (var cultureName in cultureNames)
         {
             var culture = new System.Globalization.CultureInfo(cultureName);
-/*            Debug.Log($"{culture.NativeName}:");
+            Debug.Log($"{culture.NativeName}:");
 
-            Debug.Log($"   Local date and time: {localDate.ToString(culture)}, {localDate.Kind}");
+            //Debug.Log($"   Local date and time: {localDate.ToString(culture)}, {localDate.Kind}");
             Debug.Log($"   UTC date and time:   {utcDate.ToString(culture)}, {utcDate.Kind}");
-            Debug.Log($"   EST (Orlando):       {estDate.ToString(culture)}");
-            Debug.Log($"   CET (Paris):         {cetDate.ToString(culture)}");
-            Debug.Log($"   JST (Tokyo):         {jstDate.ToString(culture)}");
-            Debug.Log($"   CST (Beijing):        {cstDate.ToString(culture)}");
-            Debug.Log($"   PST (Sacramento):        {pstDate.ToString(culture)}");*/
+            Debug.Log($"   EST (Orlando):       {estTimeOnly}");
+            Debug.Log($"   CET (Paris):         {cetTimeOnly}");
+            Debug.Log($"   JST (Tokyo):         {jstTimeOnly}");
+            Debug.Log($"   CST (Beijing):       {cstTimeOnly}");
+            Debug.Log($"   PST (Sacramento):    {pstTimeOnly}");
         }
     }
+
 }
