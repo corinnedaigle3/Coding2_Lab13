@@ -13,7 +13,9 @@ public class WeatherManager
 
 
     // First City -- Orlando
-    private const string xmlApi_1 = "https://api.openweathermap.org/data/2.5/weather?q=Orlando,us&mode=xml&appid=76d07681130d560a364db557a2872510";
+    private const string xmlApi_1 = "https://api.openweathermap.org/data/2.5/weather?q=Orlando,us&mode=xml&appid=8c7d626d2f67ba1d87b11bb8e603ef9d";
+
+    //https://api.openweathermap.org/data/2.5/weather?q=Orlando,us&mode=xml&appid=76d07681130d560a364db557a2872510
 
     public IEnumerator GetWeatherXML_1(Action<string> callback)
     {
@@ -23,7 +25,7 @@ public class WeatherManager
 
 
     // Second City -- Paris
-    private const string xmlApi_2 = "https://api.openweathermap.org/data/2.5/weather?q=Paris,fr&mode=xml&appid=76d07681130d560a364db557a2872510";
+    private const string xmlApi_2 = "https://api.openweathermap.org/data/2.5/weather?q=Paris,fr&mode=xml&appid=8c7d626d2f67ba1d87b11bb8e603ef9d";
 
 
     public IEnumerator GetWeatherXML_2(Action<string> callback)
@@ -32,7 +34,7 @@ public class WeatherManager
     }
 
     // Third City -- Tokyo
-    private const string xmlApi_3 = "https://api.openweathermap.org/data/2.5/weather?q=Tokyo,jp&mode=xml&appid=76d07681130d560a364db557a2872510";
+    private const string xmlApi_3 = "https://api.openweathermap.org/data/2.5/weather?q=Tokyo,jp&mode=xml&appid=8c7d626d2f67ba1d87b11bb8e603ef9d";
 
 
     public IEnumerator GetWeatherXML_3(Action<string> callback)
@@ -41,7 +43,7 @@ public class WeatherManager
     }
 
     // Third City -- Sacramento
-    private const string xmlApi_4 = "https://api.openweathermap.org/data/2.5/weather?q=Sacramento,us&mode=xml&appid=76d07681130d560a364db557a2872510";
+    private const string xmlApi_4 = "https://api.openweathermap.org/data/2.5/weather?q=Sacramento,us&mode=xml&appid=8c7d626d2f67ba1d87b11bb8e603ef9d";
 
 
     public IEnumerator GetWeatherXML_4(Action<string> callback)
@@ -50,7 +52,7 @@ public class WeatherManager
     }
 
     // Fourth City -- Beijing
-    private const string xmlApi_5 = "https://api.openweathermap.org/data/2.5/weather?q=Beijing,cn&mode=xml&appid=76d07681130d560a364db557a2872510";
+    private const string xmlApi_5 = "https://api.openweathermap.org/data/2.5/weather?q=Beijing,cn&mode=xml&appid=8c7d626d2f67ba1d87b11bb8e603ef9d";
 
 
     public IEnumerator GetWeatherXML_5(Action<string> callback)
