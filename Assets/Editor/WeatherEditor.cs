@@ -14,6 +14,7 @@ public class WeatherEditor : Editor
         if (GUI.changed)
         {
             changeWeather.ChangeCity();
+            changeWeather.changeSkyBox();
         }
     }
 }
