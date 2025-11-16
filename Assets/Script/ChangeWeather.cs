@@ -36,7 +36,7 @@ public class ChangeWeather : MonoBehaviour
     public Color newColor;
 
     [Range(0, 360)]
-    public int lightRange;
+    public float lightRange;
 
 
     public WeatherParser weatherParser;
@@ -91,7 +91,7 @@ public class ChangeWeather : MonoBehaviour
 
     void Update()
     {
-        //directionalLight.transform.Rotate(Max);
+        directionalLight.transform.rotation = Quaternion.Euler(lightRange, 0f, 0f);
         directionalLight.color = newColor;
         directionalLight.intensity = targetIntensity;
     }
