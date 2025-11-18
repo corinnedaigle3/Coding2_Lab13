@@ -106,31 +106,22 @@ public class ChangeWeather : MonoBehaviour
         {
             case CityState.Orlando:
                 StartCoroutine(routine: m.GetWeatherXML_1(weatherParser.ParseWeather));
-                //StartCoroutine(m.GetWeatherXML_1(m.OnXMLDataLoaded));
-                //RenderSettings.skybox = sunnySkybox;
                 break;
 
             case CityState.Paris:
                 StartCoroutine(routine: m.GetWeatherXML_2(weatherParser.ParseWeather));
-                //StartCoroutine(m.GetWeatherXML_2(m.OnXMLDataLoaded));
-                //RenderSettings.skybox = rainySkybox;
                 break;
 
             case CityState.Tokyo:
                 StartCoroutine(routine: m.GetWeatherXML_3(weatherParser.ParseWeather));
-                //RenderSettings.skybox = cloudySkybox;
                 break;
 
             case CityState.Sacramento:
                 StartCoroutine(routine: m.GetWeatherXML_4(weatherParser.ParseWeather));
-                //StartCoroutine(m.GetWeatherXML_4(m.OnXMLDataLoaded));
-                //RenderSettings.skybox = sunnySkybox;
                 break;
 
             case CityState.Beijing:
                 StartCoroutine(routine: m.GetWeatherXML_5(weatherParser.ParseWeather));
-                //StartCoroutine(m.GetWeatherXML_5(m.OnXMLDataLoaded));
-                //RenderSettings.skybox = snowySkybox;
                 break;
         }
 
