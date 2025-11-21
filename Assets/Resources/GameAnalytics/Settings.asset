@@ -26,21 +26,21 @@ MonoBehaviour:
   UserMessagesFailed: 0
   CustomArea: 
   gameKey:
-  - 
+  - 26ab2567d53c6fee964427016f86355c
   secretKey:
-  - 
+  - aaed171ede5f3cfcedfbee02b43b7b2522f6884e
   Build:
   - 0.1
   SelectedPlatformOrganization:
-  - 
+  - CookieKingdom
   SelectedPlatformStudio:
-  - 
+  - cookielakingdom
   SelectedPlatformGame:
-  - 
-  SelectedPlatformGameID: ffffffff
-  SelectedOrganization: 00000000
-  SelectedStudio: 00000000
-  SelectedGame: 00000000
+  - Lab
+  SelectedPlatformGameID: 150f0500
+  SelectedOrganization: 01000000
+  SelectedStudio: 01000000
+  SelectedGame: 01000000
   NewVersion: 
   Changes: 
   SignUpOpen: 1
@@ -61,7 +61,7 @@ MonoBehaviour:
   CustomDimensions03: []
   ResourceItemTypes: []
   ResourceCurrencies: []
-  LastCreatedGamePlatform: 0
+  LastCreatedGamePlatform: -1
   Platforms: 02000000
   CurrentInspectorState: 1
   ClosedHints: 
