@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using static ChangeWeather;
 using System.Collections.Generic;
+using GameAnalyticsSDK;
 
 public class ChangeWeather : MonoBehaviour
 {
@@ -127,6 +128,9 @@ public class ChangeWeather : MonoBehaviour
 
         DateTime localTime = GetCityLocalTime();
         directionalLight.intensity = GetLightIntensity(localTime);
+
+        GameAnalytics.NewDesignEvent("CityChange");
+        GameAnalytics.NewDesignEvent("CityChange:" + cityState);
     }
 
     public static void TimeZone()
